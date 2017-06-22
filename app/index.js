@@ -23,14 +23,16 @@ const items = [{
 
 
 
-function CartController() {
-  this.cart = [];
+class CartController {
+  constructor() {
+    this.cart = [];
+  }
 
-  this.showItems = function () {
+  showItems = () => {
     console.log('My Cart', this.cart);
   }
 
-  this.addItem = function (position) {
+  addItem = (position) => {
     this.cart.push({
       name: items[position].name,
       color: items[position].color,
@@ -39,15 +41,14 @@ function CartController() {
     this.showItems();
   }
 
-  this.editItem = function (position, newValue) {
+  editItem = (position, newValue) => {
     this.cart[position] = newValue;
     this.showItems();
   }
-
-  this.removeItem = function (position) {
+  deleteItem = (position) => {
     this.cart.splice(position, 1);
     this.showItems();
   }
 }
 
-  const myCart = new CartController();
+const myCart = new CartController();
