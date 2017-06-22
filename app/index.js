@@ -22,25 +22,32 @@ const items = [{
 ];
 
 
-const controlCart = {
-  cart: [],
-  showItems: function () {
+
+function CartController() {
+  this.cart = [];
+
+  this.showItems = function () {
     console.log('My Cart', this.cart);
-  },
-  addItem: function (position) {
+  }
+
+  this.addItem = function (position) {
     this.cart.push({
       name: items[position].name,
       color: items[position].color,
       price: items[position].price
     });
     this.showItems();
-  },
-  editItem: function (position, newValue) {
+  }
+
+  this.editItem = function (position, newValue) {
     this.cart[position] = newValue;
     this.showItems();
-  },
-  removeItem: function (position) {
+  }
+
+  this.removeItem = function (position) {
     this.cart.splice(position, 1);
     this.showItems();
   }
-} 
+}
+
+  const myCart = new CartController();
