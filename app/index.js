@@ -4,24 +4,25 @@ import './index.scss';
 // 2) create an empty array called ‘cart’ and build functions to Add , edit, or remove items from it
 // 3) use console.log(var) to check values in your loops
 
-const items = [{
-    name: 'Bike Helmet',
-    color: 'Black',
-    price: 25
-  },
-  {
-    name: 'Pannier',
-    color: 'Black',
-    price: 50
-  },
-  {
-    name: 'Odometer',
-    color: 'Black',
-    price: 20
-  }
-];
-
-
+const store = {
+  items: [{
+      name: 'Bike Helmet',
+      color: 'Black',
+      price: 25
+    },
+    {
+      name: 'Pannier',
+      color: 'Black',
+      price: 50
+    },
+    {
+      name: 'Odometer',
+      color: 'Black',
+      price: 20
+    }
+  ],
+  createTable: function() {}
+};
 
 class CartController {
   constructor() {
@@ -34,9 +35,9 @@ class CartController {
 
   addItem = (position) => {
     this.cart.push({
-      name: items[position].name,
-      color: items[position].color,
-      price: items[position].price
+      name: store.items[position].name,
+      color: store.items[position].color,
+      price: store.items[position].price
     });
     this.showItems();
   }
