@@ -82,13 +82,12 @@ class Cart {
       </tr>
     </thead>
 		<tbody>`;
-		for (let item of store) {
+		for (let [key, value] of Object.entries(store)) {
 			htmlTable +=
 				`<tr>
-  			<td>${item.name}</td>
-  			<td>${item.color}</td>
-  			<td>${item.price}</td>
-  			<td><button onclick="${addToCart()}>Add</button></td>
+  			<td>${value.name}</td>
+  			<td>${value.color}</td>
+  			<td>${value.price}</td>
   		</tr>`;
 		}
 		htmlTable +=
