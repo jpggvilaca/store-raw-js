@@ -20,9 +20,8 @@ const store = {
 };
 
 class Cart {
-	constructor(store) {
+	constructor() {
 		this.cart = [];
-		this.store = store;
 	}
 
 	showItems = () => {
@@ -70,7 +69,8 @@ class Cart {
 		cartTable.innerHTML = htmlTable;
 	}
 
-	printStore = (store) => {
+	printStore = store => {
+		console.log(store);
 		let htmlTable = '';
 		htmlTable +=
 		`<thead>
@@ -82,13 +82,13 @@ class Cart {
       </tr>
     </thead>
 		<tbody>`;
-		for (let item of this.store) {
+		for (let item of store) {
 			htmlTable +=
 				`<tr>
   			<td>${item.name}</td>
   			<td>${item.color}</td>
   			<td>${item.price}</td>
-  			//<td><button onclick="${addToCart()}>Add</button></td>
+  			<td><button onclick="${addToCart()}>Add</button></td>
   		</tr>`;
 		}
 		htmlTable +=
@@ -98,8 +98,9 @@ class Cart {
 	}
 }
 
-const myCart = new Cart(store);
+const myCart = new Cart();
+
 myCart.addItem(1);
 
 myCart.printCart();
-myCart.printStore();
+myCart.printStore(store);
