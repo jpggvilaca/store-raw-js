@@ -1,23 +1,21 @@
 import './index.scss';
 
-const store = {
-	items: [{
-			name: "Bike Helmet",
-			color: "Black",
-			price: 25
-		},
-		{
-			name: "Pannier",
-			color: "Purple",
-			price: 50
-		},
-		{
-			name: "Odometer",
-			color: "Black",
-			price: 20
-		}
-	]
-};
+const store = [{
+		name: "Bike Helmet",
+		color: "Black",
+		price: 25
+	},
+	{
+		name: "Pannier",
+		color: "Purple",
+		price: 50
+	},
+	{
+		name: "Odometer",
+		color: "Black",
+		price: 20
+	}
+];
 
 class Cart {
 	constructor() {
@@ -30,9 +28,9 @@ class Cart {
 
 	addItem = item => {
 		this.cart.push({
-			name: store.items[item].name,
-			color: store.items[item].color,
-			price: store.items[item].price
+			name: store[item].name,
+			color: store[item].color,
+			price: store[item].price
 		});
 		this.showItems();
 	};
@@ -50,7 +48,7 @@ class Cart {
 	printCart = () => {
 		let htmlTable = '';
 		htmlTable +=
-		`<thead>
+			`<thead>
       <tr>
         <th>Name</th>
         <th>Color</th>
@@ -59,7 +57,7 @@ class Cart {
     </thead>`;
 		for (let item of this.cart) {
 			htmlTable +=
-			`<tr>
+				`<tr>
   			<td>${item.name}</td>
   			<td>${item.color}</td>
   			<td>${item.price}</td>
@@ -73,7 +71,7 @@ class Cart {
 		console.log(store);
 		let htmlTable = '';
 		htmlTable +=
-		`<thead>
+			`<thead>
       <tr>
         <th>Name</th>
         <th>Color</th>
@@ -82,12 +80,15 @@ class Cart {
       </tr>
     </thead>
 		<tbody>`;
-		for (let [key, value] of Object.entries(store)) {
-			htmlTable += 
+		for (let [key, val] of Object.entries(store)) {
+			console.log(key, val);
+			console.log(val.name);
+			htmlTable +=
 				`<tr>
-  			<td>${value.name}</td>
-  			<td>${value.color}</td>
-  			<td>${value.price}</td>
+  			<td>${val.name}</td>
+  			<td>${val.color}</td>
+  			<td>${val.price}</td>
+  			<td><button>Add</button></td>
   		</tr>`;
 		}
 		htmlTable +=
