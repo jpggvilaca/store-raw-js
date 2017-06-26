@@ -83,7 +83,7 @@ class Cart {
     </thead>
 		<tbody>`;
 		for (let [key, value] of Object.entries(store)) {
-			htmlTable +=
+			htmlTable += 
 				`<tr>
   			<td>${value.name}</td>
   			<td>${value.color}</td>
