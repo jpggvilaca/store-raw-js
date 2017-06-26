@@ -1,16 +1,21 @@
 import './index.scss';
 
+window.consoleMe = () => console.log('It\'s okay, Tania');
+
 const store = [{
+		id: 0,
 		name: "Bike Helmet",
 		color: "Black",
 		price: 25
 	},
 	{
+		id: 1,
 		name: "Pannier",
 		color: "Purple",
 		price: 50
 	},
 	{
+		id: 2,	
 		name: "Odometer",
 		color: "Black",
 		price: 20
@@ -22,27 +27,20 @@ class Cart {
 		this.cart = [];
 	}
 
-	showItems = () => {
-		console.log("My Cart", this.cart);
-	};
-
 	addItem = item => {
 		this.cart.push({
 			name: store[item].name,
 			color: store[item].color,
 			price: store[item].price
 		});
-		this.showItems();
 	};
 
 	editItem = (item, newValue) => {
 		this.cart[item] = newValue;
-		this.showItems();
 	};
 
 	deleteItem = item => {
 		this.cart.splice(item, 1);
-		this.showItems();
 	};
 
 	printCart = () => {
@@ -68,7 +66,6 @@ class Cart {
 	}
 
 	printStore = store => {
-		console.log(store);
 		let htmlTable = '';
 		htmlTable +=
 			`<thead>
@@ -81,14 +78,12 @@ class Cart {
     </thead>
 		<tbody>`;
 		for (let [key, val] of Object.entries(store)) {
-			console.log(key, val);
-			console.log(val.name);
 			htmlTable +=
 				`<tr>
   			<td>${val.name}</td>
   			<td>${val.color}</td>
   			<td>${val.price}</td>
-  			<td><button>Add</button></td>
+  			<td><button onclick="ACCESS_ADDITEM_METHOD">Add</button></td>
   		</tr>`;
 		}
 		htmlTable +=
@@ -98,9 +93,10 @@ class Cart {
 	}
 }
 
+
 const myCart = new Cart();
 
-myCart.addItem(1);
+myCart.addItem(0);
 
 myCart.printCart();
 myCart.printStore(store);
