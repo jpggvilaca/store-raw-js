@@ -1,102 +1,68 @@
 import './index.scss';
+import { store } from './store';
+import DomController from './DomController';
 
-window.consoleMe = () => console.log('It\'s okay, Tania');
-
-const store = [{
-		id: 0,
-		name: "Bike Helmet",
-		color: "Black",
-		price: 25
-	},
-	{
-		id: 1,
-		name: "Pannier",
-		color: "Purple",
-		price: 50
-	},
-	{
-		id: 2,	
-		name: "Odometer",
-		color: "Black",
-		price: 20
-	}
-];
-
-class Cart {
+class Cart extends DomController {
 	constructor() {
+		super();
+
 		this.cart = [];
 	}
 
 	addItem = item => {
-		this.cart.push({
-			name: store[item].name,
-			color: store[item].color,
-			price: store[item].price
-		});
+		if (!item) { return; }
+
+		this.cart.push(item);
+		console.log(this.cart);
 	};
 
 	editItem = (item, newValue) => {
-		this.cart[item] = newValue;
+		if (!item || !newValue) { return; }
+
+		const index = this.cart.indexOf(item);
+
+		this.cart.splice(index, 1);
+		this.cart[index] = newValue;
 	};
 
 	deleteItem = item => {
 		this.cart.splice(item, 1);
 	};
 
-	printCart = () => {
-		let htmlTable = '';
-		htmlTable +=
-			`<thead>
-      <tr>
-        <th>Name</th>
-        <th>Color</th>
-        <th>Price</th>
-      </tr>
-    </thead>`;
-		for (let item of this.cart) {
-			htmlTable +=
-				`<tr>
-  			<td>${item.name}</td>
-  			<td>${item.color}</td>
-  			<td>${item.price}</td>
-  		</tr>`;
-		}
-		const cartTable = document.getElementById('cart');
-		cartTable.innerHTML = htmlTable;
-	}
-
-	printStore = store => {
-		let htmlTable = '';
-		htmlTable +=
-			`<thead>
-      <tr>
-        <th>Name</th>
-        <th>Color</th>
-        <th>Price</th>
-        <th>Cart</th>
-      </tr>
-    </thead>
-		<tbody>`;
-		for (let [key, val] of Object.entries(store)) {
-			htmlTable +=
-				`<tr>
-  			<td>${val.name}</td>
-  			<td>${val.color}</td>
-  			<td>${val.price}</td>
-  			<td><button onclick="ACCESS_ADDITEM_METHOD">Add</button></td>
-  		</tr>`;
-		}
-		htmlTable +=
-			`</tbody>`;
-		const storeTable = document.getElementById('store');
-		storeTable.innerHTML = htmlTable;
-	}
+	handleClick(elem, index) {
+    this.addItem(store[index]);
+  }
 }
 
-
+// Initialize cart instance
 const myCart = new Cart();
 
-myCart.addItem(0);
+// Array with dummy items
+const testItems = [{
+		id: 0,
+		name: "Mike",
+		color: "Black",
+		price: 25
+	},
+	{
+		id: 1,
+		name: "Tania",
+		color: "Purple",
+		price: 50
+	},
+	{
+		id: 2,
+		name: "Timm",
+		color: "Black",
+		price: 20
+	}
+];
 
-myCart.printCart();
+// TESTING CLASS METHODS
+myCart.addItem(testItems[0]);
+// myCart.editItem(testItems[0], testItems[2]);
+// myCart.deleteItem(testItems[0]);
+
+// DOM PROCESSING
+myCart.printCart(myCart.cart);
 myCart.printStore(store);
