@@ -1,8 +1,7 @@
 import './index.scss';
 
 const store = {
-	items: [
-		{
+	items: [{
 			name: "Bike Helmet",
 			color: "Black",
 			price: 25
@@ -17,11 +16,63 @@ const store = {
 			color: "Black",
 			price: 20
 		}
-	],
-	
-	createTable: function() {
+	]
+};
+
+class Cart {
+	constructor(store) {
+		this.cart = [];
+		this.store = store;
+	}
+
+	showItems = () => {
+		console.log("My Cart", this.cart);
+	};
+
+	addItem = item => {
+		this.cart.push({
+			name: store.items[item].name,
+			color: store.items[item].color,
+			price: store.items[item].price
+		});
+		this.showItems();
+	};
+
+	editItem = (item, newValue) => {
+		this.cart[item] = newValue;
+		this.showItems();
+	};
+
+	deleteItem = item => {
+		this.cart.splice(item, 1);
+		this.showItems();
+	};
+
+	printCart = () => {
 		let htmlTable = '';
-		htmlTable += 
+		htmlTable +=
+		`<thead>
+      <tr>
+        <th>Name</th>
+        <th>Color</th>
+        <th>Price</th>
+      </tr>
+    </thead>`;
+		for (let item of this.cart) {
+			htmlTable +=
+			`<tr>
+  			<td>${item.name}</td>
+  			<td>${item.color}</td>
+  			<td>${item.price}</td>
+  		</tr>`;
+		}
+		const cartTable = document.getElementById('cart');
+		cartTable.innerHTML = htmlTable;
+	}
+
+	printStore = (store) => {
+		let htmlTable = '';
+		htmlTable +=
 		`<thead>
       <tr>
         <th>Name</th>
@@ -30,78 +81,25 @@ const store = {
         <th>Cart</th>
       </tr>
     </thead>
-		<tbody>`
-		for (let item of this.items) {
-		  htmlTable += 
-		  `<tr>
+		<tbody>`;
+		for (let item of this.store) {
+			htmlTable +=
+				`<tr>
   			<td>${item.name}</td>
   			<td>${item.color}</td>
   			<td>${item.price}</td>
-  			<td>Add</td>
-  		</tr>`
+  			//<td><button onclick="${addToCart()}>Add</button></td>
+  		</tr>`;
 		}
 		htmlTable +=
-		`</tbody>`
+			`</tbody>`;
 		const storeTable = document.getElementById('store');
 		storeTable.innerHTML = htmlTable;
 	}
-};
-
-class CartController {
-	constructor() {
-		this.cart = [];
-	}
-
-	showItems = () => {
-		console.log("My Cart", this.cart);
-	};
-
-	addItem = index => {
-		this.cart.push({
-			name: store.items[index].name,
-			color: store.items[index].color,
-			price: store.items[index].price
-		});
-		this.showItems();
-	};
-
-	editItem = (index, newValue) => {
-		this.cart[index] = newValue;
-		this.showItems();
-	};
-
-	deleteItem = index => {
-		this.cart.splice(index, 1);
-		this.showItems();
-	};
-
-	printCart = () => {
-		let htmlTable = '';
-		for (let item of this.cart) {
-			htmlTable +=
-			 `<tr>
-  			<td>${item.name}</td>
-  			<td>${item.color}</td>
-  			<td>${item.price}</td>
-  		</tr>`
-		}
-		const cartTable = document.getElementById('cart');
-		cartTable.innerHTML = htmlTable;
-	}
 }
 
-const myCart = new CartController();
-
-class MegaController {
-	constructor(store, cart) {
-	}
-}
-
-const controllEverything = new MegaController(store, cart);
-
-
-store.createTable();
-
+const myCart = new Cart(store);
 myCart.addItem(1);
 
 myCart.printCart();
+myCart.printStore();
